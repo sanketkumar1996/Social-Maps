@@ -9,4 +9,14 @@
     <string name="formatted_place_data">
         Name: %1$s\nAddress: %2$s\nPhone: %3$s\nWebsite: %4$s\nRating: %5$s\nId: %6$s\n
     </string>
+
+    <string name="feature_prompt">Choose a Feature</string>
+
+    <string-array name="country_arrays">
+        <item>Toilet</item>
+        <item>First-Aid</item>
+        <item>Water</item>
+        <item>Wi-Fi</item>
+        <item>Shelther</item>
+    </string-array>
 </resources>

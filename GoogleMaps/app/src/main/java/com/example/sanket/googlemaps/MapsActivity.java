@@ -1,5 +1,6 @@
 package com.example.sanket.googlemaps;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -63,6 +64,7 @@ public class MapsActivity extends FragmentActivity implements PlaceSelectionList
 
 
 
+    Button addFeature;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,9 @@ public class MapsActivity extends FragmentActivity implements PlaceSelectionList
         mapFragment.getMapAsync(this);
         locationTextView = (TextView) findViewById(R.id.txt_location);
         attributionsTextView = (TextView) findViewById(R.id.txt_attributions);
+
+        addFeature = (Button) findViewById(R.id.addFeature);
+
 
         // Method #1
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
@@ -152,14 +157,25 @@ public class MapsActivity extends FragmentActivity implements PlaceSelectionList
     }
 
     @Override
-    public void onLocationChanged(Location location) {
+    public void onLocationChanged(final Location location) {
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }
 
         //Place current location marker
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        addFeature.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent userInfo = new Intent(MapsActivity.this, AddUserInfo.class);
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+                userInfo.putExtra("Lati",latitude);
+                userInfo.putExtra("Longi",longitude);
+                startActivity(userInfo);
+            }
+        });
        /* MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
